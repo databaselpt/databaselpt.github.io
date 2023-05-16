@@ -37,21 +37,11 @@ function validateForm() {
       // Format pesan untuk URL
       var encodedMessage = encodeURIComponent(message);
     
-      // Periksa apakah pengguna menggunakan perangkat seluler
-      var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    
       // URL WhatsApp
-      var whatsappURL = "";
-    
-      if (isMobile) {
-        // URL untuk perangkat seluler
-        whatsappURL = "https://api.whatsapp.com/send?phone=" + formattedPhoneNumber + "&text=" + encodedMessage;
-      } else {
-        // URL untuk desktop (WhatsApp Web)
-        whatsappURL = "https://web.whatsapp.com/send?phone=" + formattedPhoneNumber + "&text=" + encodedMessage;
-      }
+      var whatsappURL = "https://api.whatsapp.com/send?phone=" + formattedPhoneNumber + "&text=" + encodedMessage;
     
       // Membuka WhatsApp pada perangkat pengguna
       window.open(whatsappURL, "_blank");
     }
+    
     
