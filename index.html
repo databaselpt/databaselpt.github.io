@@ -18,44 +18,53 @@
     </form>
     
     <script>
-       var data = {
-    nama: nama,
-    harga: harga
-};
+      function simpanData() {
+    var nama = document.getElementById('nama').value;
+    var harga = document.getElementById('harga').value;
 
-fetch('https://api.github.com/repos/databaselpt/databaselpt.github.io/contents/data.json')
-    .then(response => response.json())
-    .then(fileData => {
-        var content = {
-            message: 'Menyimpan data',
-            content: btoa(JSON.stringify(data)),
-            sha: fileData.sha
-        };
+    var data = {
+        nama: nama,
+        harga: harga
+    };
 
-        fetch('https://api.github.com/repos/databaselpt/databaselpt.github.io/contents/data.json', {
-            method: 'PUT',
-            headers: {
-                'Authorization': 'token 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',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(content)
-        })
-        .then(response => {
-            if (response.status === 200) {
-                alert('Data berhasil disimpan di GitHub');
-            } else {
-                alert('Gagal menyimpan data ke GitHub');
-            }
+    fetch('https://api.github.com/repos/databaselpt/databaselpt.github.io/contents/data.json')
+        .then(response => response.json())
+        .then(fileData => {
+            var existingData = JSON.parse(atob(fileData.content));
+            existingData.push(data);
+
+            var content = {
+                message: 'Menyimpan data',
+                content: btoa(JSON.stringify(existingData)),
+                sha: fileData.sha
+            };
+
+            fetch('https://api.github.com/repos/databaselpt/databaselpt.github.io/contents/data.json', {
+                method: 'PUT',
+                headers: {
+                    'Authorization': 'token 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',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(content)
+            })
+                .then(response => {
+                    if (response.status === 200) {
+                        alert('Data berhasil disimpan di GitHub');
+                    } else {
+                        alert('Gagal menyimpan data ke GitHub');
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
+                    alert('Gagal menyimpan data ke GitHub');
+                });
         })
         .catch(error => {
             console.log(error);
             alert('Gagal menyimpan data ke GitHub');
         });
-    })
-    .catch(error => {
-        console.log(error);
-        alert('Gagal menyimpan data ke GitHub');
-    });
+}
+
 
     </script>
 </body>
