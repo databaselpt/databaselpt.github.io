@@ -1,54 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Form Data Barang</title>
+  <title>Buka JSON</title>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-  <h1>Form Data Barang</h1>
-  
-  <form id="dataForm">
-    <label for="nama">Nama Barang:</label>
-    <input type="text" id="nama" name="nama" required><br><br>
+  <h1>Buka JSON</h1>
 
-    <label for="harga">Harga:</label>
-    <input type="number" id="harga" name="harga" required><br><br>
-
-    <button type="submit" id="kirimButton">Kirim Data</button>
-  </form>
+  <div id="result"></div>
 
   <script>
     $(document).ready(function() {
-      $('#dataForm').submit(function(event) {
-        event.preventDefault();
+      $.ajax({
+        url: 'https://api.github.com/repos/databaselpt/databaselpt.github.io/contents/data.json',
+        headers: {
+          'Authorization': 'Bearer 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'
+        },
+        success: function(response) {
+          var content = response.content;
+          var decodedContent = atob(content);
+          var jsonData = JSON.parse(decodedContent);
 
-        var namaBarang = $('#nama').val();
-        var hargaBarang = $('#harga').val();
-
-        var data = {
-          nama: namaBarang,
-          harga: hargaBarang
-        };
-
-        $.ajax({
-          url: 'https://api.github.com/repos/databaselpt/databaselpt.github.io/contents/data.json',
-          type: 'PUT',
-          headers: {
-            'Authorization': 'Bearer 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'
-          },
-          data: JSON.stringify({
-            message: 'Add data',
-            content: btoa(JSON.stringify(data)),
-            sha: null
-          }),
-          success: function(response) {
-            console.log('Data berhasil dikirim ke GitHub.');
-          },
-          error: function(error) {
-            console.error('Terjadi kesalahan:', error);
-          }
-        });
+          displayData(jsonData);
+        },
+        error: function(error) {
+          console.error('Terjadi kesalahan:', error);
+        }
       });
+
+      function displayData(data) {
+        var resultElement = $('#result');
+        resultElement.empty();
+
+        for (var i = 0; i < data.length; i++) {
+          var namaBarang = data[i].nama;
+          var hargaBarang = data[i].harga;
+
+          var itemElement = $('<div>').text('Nama Barang: ' + namaBarang + ', Harga: ' + hargaBarang);
+          resultElement.append(itemElement);
+        }
+      }
     });
   </script>
 </body>
