@@ -1,16 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Buka JSON</title>
+  <title>Input Data Barang</title>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-  <h1>Buka JSON</h1>
+  <h1>Input Data Barang</h1>
+
+  <label for="nama">Nama Barang:</label>
+  <input type="text" id="nama">
+
+  <label for="harga">Harga Barang:</label>
+  <input type="number" id="harga">
+
+  <button onclick="tambahData()">Tambah Data</button>
 
   <div id="result"></div>
 
   <script>
     $(document).ready(function() {
+      loadData();
+    });
+
+    function loadData() {
       $.ajax({
         url: 'https://api.github.com/repos/databaselpt/databaselpt.github.io/contents/data.json',
         headers: {
@@ -27,20 +39,77 @@
           console.error('Terjadi kesalahan:', error);
         }
       });
+    }
 
-      function displayData(data) {
-        var resultElement = $('#result');
-        resultElement.empty();
+    function displayData(data) {
+      var resultElement = $('#result');
+      resultElement.empty();
 
-        for (var i = 0; i < data.length; i++) {
-          var namaBarang = data[i].nama;
-          var hargaBarang = data[i].harga;
+      for (var i = 0; i < data.length; i++) {
+        var namaBarang = data[i].nama;
+        var hargaBarang = data[i].harga;
 
-          var itemElement = $('<div>').text('Nama Barang: ' + namaBarang + ', Harga: ' + hargaBarang);
-          resultElement.append(itemElement);
-        }
+        var itemElement = $('<div>').text('Nama Barang: ' + namaBarang + ', Harga: ' + hargaBarang);
+        resultElement.append(itemElement);
       }
-    });
-  </script>
+    }
+
+    function tambahData() {
+      var namaBarang = $('#nama').val();
+      var hargaBarang = $('#harga').val();
+
+      var newData = {
+        "nama": namaBarang,
+        "harga": parseInt(hargaBarang)
+      };
+
+      $.ajax({
+        url: 'https://api.github.com/repos/databaselpt/databaselpt.github.io/contents/data.json',
+        type: 'GET',
+        headers: {
+          'Authorization': 'Bearer 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'
+        },
+        success: function(response) {
+          var content = response.content;
+          var decodedContent = atob(content);
+          var jsonData = JSON.parse(decodedContent);
+
+          jsonData.push(newData);
+
+          updateData(jsonData);
+        },
+        error: function(error) {
+          console.error('Terjadi kesalahan:', error);
+        }
+      });
+    }
+
+    function updateData(data) {
+      var encodedData = btoa(JSON.stringify(data));
+
+      $.ajax({
+        url: 'https://api.github.com/repos/databaselpt/databaselpt.github.io/contents/data.json',
+        type: 'PUT',
+        headers: {
+          'Authorization': 'Bearer ghp_OQFCAtetotvLHWISs2I30Q7qkq
+      },
+      beforeSend: function(xhr) {
+          xhr.setRequestHeader("Authorization", "Bearer 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");
+      },
+      data: JSON.stringify({
+          message: "Update data.json",
+          content: encodedData,
+          sha: response.sha
+      }),
+      success: function(response) {
+          console.log("Data berhasil diperbarui:", response);
+          loadData();
+      },
+      error: function(error) {
+          console.error('Terjadi kesalahan:', error);
+      }
+  });
+}
+</script>
 </body>
 </html>
