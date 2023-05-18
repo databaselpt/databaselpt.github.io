@@ -83,33 +83,53 @@
         }
       });
     }
+function updateData(data) {
+  var encodedData = btoa(JSON.stringify(data));
 
-    function updateData(data) {
-      var encodedData = btoa(JSON.stringify(data));
+  $.ajax({
+    url: 'https://api.github.com/repos/databaselpt/databaselpt.github.io/contents/data.json',
+    type: 'GET',
+    headers: {
+      'Authorization': 'Bearer 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'
+    },
+    success: function(response) {
+      var content = response.content;
+      var decodedContent = atob(content);
+      var jsonData = JSON.parse(decodedContent);
+
+      jsonData.push(newData);
+
+      var sha = response.sha;
 
       $.ajax({
         url: 'https://api.github.com/repos/databaselpt/databaselpt.github.io/contents/data.json',
         type: 'PUT',
         headers: {
-          'Authorization': 'Bearer ghp_OQFCAtetotvLHWISs2I30Q7qkq
-      },
-      beforeSend: function(xhr) {
+          'Authorization': 'Bearer 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',
+          'Content-Type': 'application/json'
+        },
+        beforeSend: function(xhr) {
           xhr.setRequestHeader("Authorization", "Bearer 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");
-      },
-      data: JSON.stringify({
+        },
+        data: JSON.stringify({
           message: "Update data.json",
           content: encodedData,
-          sha: response.sha
-      }),
-      success: function(response) {
+          sha: sha
+        }),
+        success: function(response) {
           console.log("Data berhasil diperbarui:", response);
           loadData();
-      },
-      error: function(error) {
+        },
+        error: function(error) {
           console.error('Terjadi kesalahan:', error);
-      }
+        }
+      });
+    },
+    error: function(error) {
+      console.error('Terjadi kesalahan:', error);
+    }
   });
 }
-</script>
-</body>
+  </script>
+  </body>
 </html>
