@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Buka JSON</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <h1>Buka JSON</h1>
+
+  <div id="result"></div>
+
+  <script>
+    $(document).ready(function() {
+      $.ajax({
+        url: 'https://api.github.com/repos/databaselpt/databaselpt.github.io/contents/data.json',
+        headers: {
+          'Authorization': 'Bearer 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'
+        },
+        success: function(response) {
+          var content = response.content;
+          var decodedContent = atob(content);
+          var jsonData = JSON.parse(decodedContent);
+
+          displayData(jsonData);
+        },
+        error: function(error) {
+          console.error('Terjadi kesalahan:', error);
+        }
+      });
+
+      function displayData(data) {
+        var resultElement = $('#result');
+        resultElement.empty();
+
+        for (var i = 0; i < data.length; i++) {
+          var namaBarang = data[i].nama;
+          var hargaBarang = data[i].harga;
+
+          var itemElement = $('<div>').text('Nama Barang: ' + namaBarang + ', Harga: ' + hargaBarang);
+          resultElement.append(itemElement);
+        }
+      }
+    });
+  </script>
+</body>
+</html>
