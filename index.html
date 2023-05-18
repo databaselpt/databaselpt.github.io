@@ -26,7 +26,7 @@
       $.ajax({
         url: 'https://api.github.com/repos/databaselpt/databaselpt.github.io/contents/data.json',
         headers: {
-          'Authorization': 'Bearer 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'
+          'Authorization': 'Bearer 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'
         },
         success: function(response) {
           var content = response.content;
@@ -67,7 +67,7 @@
         url: 'https://api.github.com/repos/databaselpt/databaselpt.github.io/contents/data.json',
         type: 'GET',
         headers: {
-          'Authorization': 'Bearer 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'
+          'Authorization': 'Bearer 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'
         },
         success: function(response) {
           var content = response.content;
@@ -91,7 +91,7 @@
         url: 'https://api.github.com/repos/databaselpt/databaselpt.github.io/contents/data.json',
         type: 'GET',
         headers: {
-          'Authorization': 'Bearer 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'
+          'Authorization': 'Bearer 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'
         },
         success: function(response) {
           var content = response.content;
@@ -106,11 +106,11 @@
             url: 'https://api.github.com/repos/databaselpt/databaselpt.github.io/contents/data.json',
             type: 'PUT',
             headers: {
-              'Authorization': 'Bearer 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',
+              'Authorization': 'Bearer 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',
               'Content-Type': 'application/json'
             },
             beforeSend: function(xhr) {
-              xhr.setRequestHeader("Authorization", "Bearer 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");
+              xhr.setRequestHeader("Authorization", "Bearer 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");
             },
             data: JSON.stringify({
               message: "Update data.json",
@@ -132,5 +132,6 @@
       });
     }
   </script>
+
 </body>
 </html>
