@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PT LABAI PERSADA TAMBANG</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+<style>
+
+    /* Start Global Rules */
+    * {
+        box-sizing: border-box;
+      }
+      body {
+        font-family: 'Didact Gothic', sans-serif;
+        background-image: url(https://i.postimg.cc/tgsGrsMD/cover8.png); /* Ganti dengan URL gambar yang diinginkan */
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+      
+      a {
+        text-decoration: none;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .container {
+        padding-left: 15px;
+        padding-right: 15px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      /* Small */
+      @media (min-width: 768px) {
+        .container {
+          width: 750px;
+        }
+      }
+      /* Medium */
+      @media (min-width: 992px) {
+        .container {
+          width: 970px;
+        }
+      }
+      /* Large */
+      @media (min-width: 1200px) {
+        .container {
+          width: 1170px;
+        }
+      }
+      /* End Global Rules */
+      
+      /* Start Landing Page */
+      .landing-page header {
+        min-height: 80px;
+        display: flex;
+      }
+      @media (max-width: 767px) {
+        .landing-page header {
+          min-height: auto;
+          display: initial;
+        }
+      }
+      .landing-page header .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      @media (max-width: 767px) {
+        .landing-page header .container {
+          flex-direction: column;
+          justify-content: center;
+        }
+      }
+      .landing-page header .logo {
+        color: #5d5d5d;
+        font-style: italic;
+        text-transform: uppercase;
+        font-size: 20px;
+      }
+      @media (max-width: 767px) {
+        .landing-page header .logo {
+          margin-top: 20px;
+          margin-bottom: 20px;
+        }
+      }
+      .landing-page header .links {
+        display: flex;
+        align-items: center;
+      }
+      @media (max-width: 767px) {
+        .landing-page header .links {
+          text-align: center;
+          gap: 10px;
+        }
+      }
+      .landing-page header .links li {
+        margin-left: 3px; /* Ubah jarak margin kiri menjadi 20px */
+        margin-right: 3px; /* Ubah jarak margin kanan menjadi 20px */
+        color: #5d5d5d;
+        cursor: pointer;
+        transition: transform 0.3s, background-color 0.3s;
+        padding: 10px 20px;
+        border-radius: 30px;
+        border: none;
+        background-color: transparent;
+      }
+      
+      .landing-page header .links li:last-child {
+        background-color: #6c63ff;
+        color: #FFF;
+      }
+      
+      .landing-page header .links li:not(:last-child):hover {
+        color: #FFF;
+        background-color: #5a55d8;
+        transform: scale(1.1);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      }
+      
+      
+      
+      .landing-page .content .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 140px;
+        min-height: calc(100vh - 80px);
+      }
+      @media (max-width: 767px) {
+        .landing-page .content .container {
+          gap: 0;
+          min-height: calc(100vh - 101px);
+          justify-content: center;
+          flex-direction: column-reverse;
+        }
+      }
+      @media (max-width: 767px) {
+        .landing-page .content .info {
+          text-align: center;
+        }
+      }
+      .landing-page .content .info h1 {
+        color: #5d5d5d;
+        font-size: 44px;
+      }
+      .landing-page .content .info p {
+        margin: 0;
+        line-height: 1.6;
+        font-size: 15px;
+        color: #5d5d5d;
+      }
+      .landing-page .content .info button {
+        border: 0;
+        border-radius: 20px;
+        padding: 12px 30px;
+        margin-top: 30px;
+        cursor: pointer;
+        color: #FFF;
+        background-color: #6c63ff;
+      }
+      .landing-page .content .image img {
+        max-width: 100%;
+      }
+      /* End Landing Page */
+
+      .image {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .image img {
+    width: 100%;
+    height: auto;
+    animation: slide-animation 1s 1;
+    opacity: 1;
+  }
+  
+  @keyframes slide-animation {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    20%, 80% {
+      opacity: 0;
+      transform: scale(1.1);
+    }
+  }
+ </style>>
+</head>
+<body>
+  <!-- Start Landing Page -->
+<div class="landing-page">
+  <header>
+    <div class="container">
+      <a href="#" class="logo">
+        <img src="gambar/logo.png" alt="" width="150" height="100">
+      </a>          
+      <ul class="links">
+        <li>Home</li>
+        <li>Tentang Kami</li>
+        <li>Team</li>
+        <li>Alamat</li>
+        <li><a href="login.html" style="color: white;">Login <i class="fas fa-sign-in-alt"></i></a></li>
+        </li>
+      </ul>
+    </div>
+  </header>
+  <div class="content">
+    <div class="container">
+      <div class="info">
+        <h1>Berkarya bagi Bangsa dan Negara</h1>
+        <p>PT LABAI PERSADA TAMBANG bergerak dalam bidang pertambangan bijih bauksit yang berada di Kalimantan Barat, Ketapang</p>
+        <button>Tentang Kami </button>
+      </div>
+      <div class="image">
+        <img src="https://i.postimg.cc/XNkNBCSy/001234.png">
+      </div>          
+    </div>
+  </div>
+</div>
+<!-- End Landing Page -->
+</body>
+</html>
